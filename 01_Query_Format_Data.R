@@ -75,6 +75,14 @@ soilmetrics_file = path(database_repository, '05_queries/analysis/13_soil_metric
 
 # Read local data
 zone_shape = st_read(zone_input)
+elevation_raster = rast(elevation_input)
+aspect_raster = rast(aspect_input)
+slope_raster = rast(slope_input)
+heatload_raster = rast(heatload_input)
+position_raster = rast(position_input)
+relief_raster = rast(relief_input)
+rough_raster = rast(rough_input)
+wetness_raster = rast(wetness_input)
 
 #### QUERY AKVEG DATABASE
 ####------------------------------
@@ -93,16 +101,6 @@ taxa_data = as_tibble(dbGetQuery(database_connection, taxa_query))
 
 # Get geometry for intersection
 intersect_geometry = st_geometry(zone_shape[zone_shape$zone == 'Boreal Southern' | zone_shape$zone == 'Boreal Central',])
-
-# Read raster data
-elevation_raster = rast(elevation_input)
-aspect_raster = rast(aspect_input)
-slope_raster = rast(slope_input)
-heatload_raster = rast(heatload_input)
-position_raster = rast(position_input)
-relief_raster = rast(relief_input)
-rough_raster = rast(rough_input)
-wetness_raster = rast(wetness_input)
 
 # Read site visit data from AKVEG Database
 site_visit_query = read_file(site_visit_file)
